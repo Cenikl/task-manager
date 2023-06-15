@@ -1,5 +1,5 @@
 import { useTaskManager } from '@/store/useTaskManager';
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 
 interface Task {
   id: number,
@@ -12,7 +12,8 @@ interface updateTask {
 }
 
 const TaskManager = () => {
-  const createTaskRef = document.getElementById("ref") as HTMLInputElement;
+  const createTaskRef = useRef<HTMLInputElement>(null);
+  const [title,setTitle] = useState("");
   const {
      tasks,
      searchTask,
@@ -23,7 +24,9 @@ const TaskManager = () => {
    } = useTaskManager();
 
   const handleAddTask = () => {
-    const title = createTaskRef.value;
+    if(createTaskRef.current?.value){
+      setTitle(createTaskRef.current?.value)
+    }
     const newTask = {
       id: Date.now(),
       title,
@@ -52,7 +55,7 @@ const TaskManager = () => {
   return (
     <div>
       <h1>Task Manager</h1>
-      <input type="text" id="ref" placeholder="ref"/>
+      <input type="text" ref={createTaskRef} placeholder="ref"/>
 
       <button onClick={handleAddTask}>Add Task</button>
 
