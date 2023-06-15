@@ -20,7 +20,7 @@ interface TaskStore {
 
 const useTaskManager = create<TaskStore>((set) => ({
   tasks:[],
-  addTask: (task) => set((state) => ({ tasks: [...state.tasks,task] })),
+  addTask: (task) => set((state) => ({ tasks: [...state.tasks,task]})),
   updateTask: (taskId,updatedTask) => set((state) => ({tasks: state.tasks.map((task) => (task.id === taskId ? { ...task, title: updatedTask.title } : task))})),
   deleteTask: (taskId) => set((state) => ({ tasks: state.tasks.filter((task) => task.id !== taskId) })),
   searchTask:"",

@@ -24,7 +24,6 @@ const TaskManager = () => {
    } = useTaskManager();
 
   const handleAddTask = () => {
-    setTitle("")
     if(createTaskRef.current?.value){
       setTitle(createTaskRef.current?.value)
     }
